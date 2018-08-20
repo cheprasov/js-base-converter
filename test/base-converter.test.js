@@ -44,6 +44,8 @@ test('Prepared bases have unique chars', () => {
 test('Check "encodeNumber" edge cases', () => {
     expect(baseConverter.encodeNumber(10, [])).toBe(null);
     expect(baseConverter.encodeNumber(10, ['a'])).toBe(null);
+    expect(baseConverter.encodeNumber('AA', ['a', 'b'])).toBe(null);
+    expect(baseConverter.encodeNumber(NaN, [0, 1])).toBe(null);
 });
 
 test('Check "encodeNumber" with prepared bases', () => {

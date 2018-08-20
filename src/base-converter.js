@@ -19,7 +19,7 @@ const baseConverter = {
      * @return {null|string}
      */
     encodeNumber(number, base) {
-        if (!Array.isArray(base) || !base.length) {
+        if (isNaN(number) || !Array.isArray(base) || !base.length) {
             return null;
         }
         let value = Math.abs(number);
@@ -83,15 +83,12 @@ const baseConverter = {
 
     /**
      * @param {string|number} string
-     * @param fromBase
-     * @param toBase
+     * @param {string[]} fromBase
+     * @param {string[]} toBase
      * @return {string|null}
      */
     convert(string, fromBase, toBase) {
         const number = baseConverter.decodeNumber(string, fromBase);
-        if (isNaN(number)) {
-            return null;
-        }
         return baseConverter.encodeNumber(number, toBase);
     }
 
