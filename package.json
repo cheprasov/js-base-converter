@@ -4,8 +4,18 @@
   "description": "",
   "main": "src/base-converter.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "author": "Alexander Cheprasov",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^23.5.0"
+  },
+  "jest": {
+    "verbose": true,
+    "testURL": "http://localhost/",
+    "moduleNameMapper": {
+      "/SRC/(.*)$": "<rootDir>/src/$1"
+    }
+  }
 }

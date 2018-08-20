@@ -1,6 +1,8 @@
 const baseConverter = {
 
-    BASE_2: ['0', '1'],
+    BASE_2: [0, 1],
+
+    BASE_8: [0, 1, 2, 3, 4, 5, 6, 7],
 
     BASE_16: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'],
 
@@ -14,15 +16,18 @@ const baseConverter = {
     /**
      * @param {number} number
      * @param {string[]} base
-     * @return {*|string}
+     * @return {null|string}
      */
     encodeNumber(number, base) {
+        if (!Array.isArray(base) || !base.length) {
+            return null;
+        }
         let value = Math.abs(number);
         const encoded = [];
         const count = base.length;
 
         if (count === 1 && number !== 0) {
-            return NaN;
+            return null;
         }
         while (value >= count) {
             let i = value % count;
@@ -39,17 +44,17 @@ const baseConverter = {
     /**
      * @param {string} string
      * @param {string[]} base
-     * @return {number}
+     * @return {number|NaN}
      */
     decodeNumber(string, base) {
-        if (isNaN(string)) {
+        if (string === '' || !Array.isArray(base) || !base.length) {
             return NaN;
         }
         const count = base.length;
         const hash = base.reduce((hash, num, i) => {hash[num] = i; return hash;}, {});
 
         let number = 0;
-        let str = string;
+        let str = String(string);
         let isNegative = false;
 
         if (str[0] === '-') {
@@ -60,8 +65,12 @@ const baseConverter = {
         let pow = 0;
         while (str.length > 0) {
             const chr = str[str.length - 1];
+            const num = hash[chr];
+            if (typeof num !== 'number') {
+                return NaN;
+            }
             str = str.substr(0, str.length - 1);
-            number += (count ** pow) * hash[chr];
+            number += (count ** pow) * num;
             pow += 1
         }
 
@@ -71,6 +80,20 @@ const baseConverter = {
 
         return number;
     },
+
+    /**
+     * @param {string|number} string
+     * @param fromBase
+     * @param toBase
+     * @return {string|null}
+     */
+    convert(string, fromBase, toBase) {
+        const number = baseConverter.decodeNumber(string, fromBase);
+        if (isNaN(number)) {
+            return null;
+        }
+        return baseConverter.encodeNumber(number, toBase);
+    }
 
 };
 
