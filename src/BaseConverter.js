@@ -4,7 +4,7 @@ export type BaseType = Array<string|number>;
 
 export default class BaseConverter {
 
-    static _isAllowedNegativeValues(base: BaseType): boolean {
+    static _isNegativeValueAllowed(base: BaseType): boolean {
         return Array.isArray(base) && base.indexOf('-') === -1;
     }
 
@@ -26,7 +26,7 @@ export default class BaseConverter {
         }
         encoded.push(base[value]);
         if (num < 0) {
-            if (!this._isAllowedNegativeValues(base)) {
+            if (!this._isNegativeValueAllowed(base)) {
                 return null;
             }
             encoded.push('-');
@@ -45,7 +45,7 @@ export default class BaseConverter {
         let str = String(value);
         let isNegative = false;
 
-        if (str[0] === '-' && this._isAllowedNegativeValues(base)) {
+        if (str[0] === '-' && this._isNegativeValueAllowed(base)) {
             str = str.substr(1, str.length - 1);
             isNegative = true;
         }

@@ -7,22 +7,22 @@ import base62 from './Base/base62';
 
 describe('BaseConverter', () => {
 
-    describe('_isAllowedNegativeValues', () => {
+    describe('_isNegativeValueAllowed', () => {
         it('should return true', () => {
-            expect(BaseConverter._isAllowedNegativeValues(baseBinary)).toBeTruthy();
-            expect(BaseConverter._isAllowedNegativeValues(baseOctal)).toBeTruthy();
-            expect(BaseConverter._isAllowedNegativeValues(baseDecimal)).toBeTruthy();
-            expect(BaseConverter._isAllowedNegativeValues(baseHexadecimal)).toBeTruthy();
-            expect(BaseConverter._isAllowedNegativeValues(base62)).toBeTruthy();
+            expect(BaseConverter._isNegativeValueAllowed(baseBinary)).toBeTruthy();
+            expect(BaseConverter._isNegativeValueAllowed(baseOctal)).toBeTruthy();
+            expect(BaseConverter._isNegativeValueAllowed(baseDecimal)).toBeTruthy();
+            expect(BaseConverter._isNegativeValueAllowed(baseHexadecimal)).toBeTruthy();
+            expect(BaseConverter._isNegativeValueAllowed(base62)).toBeTruthy();
         });
 
         it('should return false', () => {
-            expect(BaseConverter._isAllowedNegativeValues(['A', 'B', 'C', '-'])).toBeFalsy();
-            expect(BaseConverter._isAllowedNegativeValues(['-', 'A', 'B', 'C'])).toBeFalsy();
-            expect(BaseConverter._isAllowedNegativeValues(['-', 1, 2, 3])).toBeFalsy();
-            expect(BaseConverter._isAllowedNegativeValues([1, 2, 3, '-'])).toBeFalsy();
-            expect(BaseConverter._isAllowedNegativeValues(null)).toBeFalsy();
-            expect(BaseConverter._isAllowedNegativeValues(1)).toBeFalsy();
+            expect(BaseConverter._isNegativeValueAllowed(['A', 'B', 'C', '-'])).toBeFalsy();
+            expect(BaseConverter._isNegativeValueAllowed(['-', 'A', 'B', 'C'])).toBeFalsy();
+            expect(BaseConverter._isNegativeValueAllowed(['-', 1, 2, 3])).toBeFalsy();
+            expect(BaseConverter._isNegativeValueAllowed([1, 2, 3, '-'])).toBeFalsy();
+            expect(BaseConverter._isNegativeValueAllowed(null)).toBeFalsy();
+            expect(BaseConverter._isNegativeValueAllowed(1)).toBeFalsy();
         });
     });
 
