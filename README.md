@@ -48,6 +48,12 @@ console.log('FF custom =>', BaseConverter.convert('FF', ['A', 'B', 'C', 'D', 'E'
 // FF custom => 2133 bin
 ```
 
+## How to install
+
+```bash
+> npm install @cheprasov/base-converter
+```
+
 ## Documentation
 
 ### Import
